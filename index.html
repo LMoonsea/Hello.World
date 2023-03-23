@@ -9,19 +9,13 @@
 
 <body>
 
-  <button id="login" onclick="user.login()">Entrar</button>
+    <button id="login" onclick="user.login()">Entrar</button>
 
-  <script>
+    <script>
         /*
         Esse é o código JavaScript dessa página.
         */
 
-        // Dados do usuário usando variáveis discretas.
-        var name = 'Joca da Silva'
-        var email = 'joca@silva.com'
-        var birth = '2003-03-18'
-        var cpf = '012.345.678-90'
-        var address = 'Rua do Siri Molhado, 22'
 
         // Dados do usuário. Forma moderna!
         var user = {
@@ -30,10 +24,11 @@
             name: 'Joca da Silva',
             email: 'joca@silva.com',
             birth: '2003-03-18',
+            password: '12345',
             cpf: '012.345.678-90',
             address: 'Rua do Siri Molhado, 22',
+            photo: 'https://randomuser.me/api/portraits/men/23.jpg',
 
-            
             // Métodos do objeto "user".
             login: function () {
 
@@ -43,28 +38,42 @@
                 // Se o usuário não digitou nada...
                 if (userEmail == "" || userEmail == null) {
                     alert("Oooops! Você não informou um e-mail...")
-                // Encerra a função retornando false
-                return false
-            }   else if(userEmail != user.email){
-                alert('Oooops! E-mail não cadastrado...')
-            } 
+                    // Encerra a função retornando false
+                    return false
+                } else if (userEmail != user.email) {
+                    alert('Oooops! E-mail não cadastrado...')
+                }
 
-                
-            // Digite a senha.
-                var userPass = prompt ('Digite sua senha:')
-                if(userPass == "" || userPass == null){
+                // Digite a senha.
+                var userPass = prompt('Digite sua senha:')
+                if (userPass == "" || userPass == null) {
                     alert("Oooops! Você não informou a senha...")
-                    
+
                     // Encerra a função retornando a false
                     return false
+                } else if (userPass != user.password) {
+                    alert('Oooops! Senha incorreta...')
+                    return false
                 }
+
+                document.write('<img src="' + user.photo + '"> Olá ' + user.name + '!')
+                localStorage.userdata = JSON.stringify({
+                    name: user.name,
+                    email: user.email
+                })
+                let parts = user.birth.split('-')
+                let bdate = parts[2] + '/' + parts[1] + '/' + parts[0]
+                document.write(' Nascido em ' + bdate)
+
+
+
             },
-            firtName: function () {
-                alert(name.split(' ')[0])
+            firstName: function () {
+                alert(this.name.split(' ')[0])
             }
         }
-        // Chama a função de login     
-        user.login()
+        // Chama a função de login.
+        //user.login()
 
 
 
